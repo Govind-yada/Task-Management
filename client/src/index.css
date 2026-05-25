@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply transition-colors duration-150;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    @apply dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-brand-500 hover:bg-brand-600 active:bg-brand-700
+           text-white font-medium text-sm
+           shadow-sm hover:shadow-md
+           transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-white hover:bg-slate-50 active:bg-slate-100
+           dark:bg-slate-800 dark:hover:bg-slate-700 dark:active:bg-slate-600
+           text-slate-700 dark:text-slate-200 font-medium text-sm
+           border border-slate-200 dark:border-slate-700
+           shadow-sm hover:shadow-md
+           transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-red-500 hover:bg-red-600 active:bg-red-700
+           text-white font-medium text-sm
+           shadow-sm hover:shadow-md
+           transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg text-sm
+           bg-white dark:bg-slate-800
+           border border-slate-200 dark:border-slate-700
+           text-slate-900 dark:text-slate-100
+           placeholder-slate-400 dark:placeholder-slate-500
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
+           transition-all duration-150;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-900
+           border border-slate-100 dark:border-slate-800
+           rounded-xl shadow-card;
+  }
+
+  .label {
+    @apply block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1 uppercase tracking-wide;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .priority-low    { @apply badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400; }
+  .priority-medium { @apply badge bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400; }
+  .priority-high   { @apply badge bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400; }
+  .priority-urgent { @apply badge bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400; }
+
+  .status-todo        { @apply badge bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400; }
+  .status-in-progress { @apply badge bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400; }
+  .status-completed   { @apply badge bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400; }
+}
+
+/* Animations */
+.animate-fade-in   { animation: fadeIn 0.3s ease-out both; }
+.animate-slide-up  { animation: slideUp 0.35s ease-out both; }
+.animate-slide-in  { animation: slideIn 0.25s ease-out both; }
+
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Staggered list children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+.stagger > *:nth-child(6) { animation-delay: 300ms; }
+.stagger > *:nth-child(7) { animation-delay: 360ms; }
+.stagger > *:nth-child(8) { animation-delay: 420ms; }
+.stagger > *:nth-child(9) { animation-delay: 480ms; }
+.stagger > *:nth-child(10) { animation-delay: 540ms; }
