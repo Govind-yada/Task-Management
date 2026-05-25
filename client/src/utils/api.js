@@ -20,9 +20,14 @@ API.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('taskflow_token');
-      localStorage.removeItem('taskflow_user');
-      window.location.href = '/login';
+      const token = localStorage.getItem('taskflow_token');
+      // Only redirect if user was previously logged in
+      // Not when they just entered wrong password on login page
+      if (token) {
+        localStorage.removeItem('taskflow_token');
+        localStorage.removeItem('taskflow_user');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
@@ -31,17 +36,17 @@ API.interceptors.response.use(
 // ── Auth ──────────────────────────────────────────────────────────────────────
 export const authAPI = {
   register: (data) => API.post('/auth/register', data),
-  login:    (data) => API.post('/auth/login', data),
-  getMe:    ()     => API.get('/auth/me'),
+  login: (data) => API.post('/auth/login', data),
+  getMe: () => API.get('/auth/me'),
 };
 
 // ── Tasks ─────────────────────────────────────────────────────────────────────
 export const tasksAPI = {
-  getAll:  (params) => API.get('/tasks', { params }),
-  create:  (data)   => API.post('/tasks', data),
-  update:  (id, data) => API.put(`/tasks/${id}`, data),
-  delete:  (id)     => API.delete(`/tasks/${id}`),
-  toggle:  (id)     => API.patch(`/tasks/${id}/toggle`),
+  getAll: (params) => API.get('/tasks', { params }),
+  create: (data) => API.post('/tasks', data),
+  update: (id, data) => API.put(`/tasks/${id}`, data),
+  delete: (id) => API.delete(`/tasks/${id}`),
+  toggle: (id) => API.patch(`/tasks/${id}/toggle`),
 };
 
 export default API;
