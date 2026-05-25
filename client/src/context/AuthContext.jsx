@@ -53,16 +53,26 @@ export const AuthProvider = ({ children }) => {
 
   const login = useCallback(async (credentials) => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    const { data } = await authAPI.login(credentials);
-    dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-    return data;
+    try {
+      const { data } = await authAPI.login(credentials);
+      dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+      return data;
+    } catch (err) {
+      dispatch({ type: 'SET_LOADING', payload: false });
+      throw err;
+    }
   }, []);
 
   const register = useCallback(async (userData) => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    const { data } = await authAPI.register(userData);
-    dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-    return data;
+    try {
+      const { data } = await authAPI.register(userData);
+      dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+      return data;
+    } catch (err) {
+      dispatch({ type: 'SET_LOADING', payload: false });
+      throw err;
+    }
   }, []);
 
   const logout = useCallback(() => {
